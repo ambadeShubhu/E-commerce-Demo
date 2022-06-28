@@ -17,14 +17,14 @@ const persistConfig = {
 const persistConfigFavoriteItem = {
   key: 'favoriteItem',
   storage: AsyncStorage,
-  whitelist: ['favItemBulk'],
+  whitelist: ['favItemBulk', 'cartBulk'],
 };
 
 const rootReducer = combineReducers({
   productData: productReducer,
   loginReducer: persistReducer(persistConfig, loginReducer),
   favoriteItem: persistReducer(persistConfigFavoriteItem, favoriteReducer),
-  cartData: cartReducer,
+  cartData: persistReducer(persistConfigFavoriteItem, cartReducer),
 });
 
 const enhancers = [applyMiddleware(thunk), applyMiddleware(logger)];

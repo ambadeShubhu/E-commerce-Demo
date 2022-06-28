@@ -20,10 +20,6 @@ const AddToFav = () => {
   const {favoriteList} = route.params;
   const [favoriteList1, setFavoruiteList1] = useState([]);
 
-  // useEffect(() => {
-  //   console.log('-delete-', favItem);
-  // }, [favItem]);
-
   const onRemoveFavorite = removeProducts => {
     dispatch(removeFavItemList(removeProducts));
     const filteredList = favoriteList1.filter(

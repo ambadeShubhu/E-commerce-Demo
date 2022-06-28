@@ -10,6 +10,7 @@ import {
 import React, {useState} from 'react';
 import Modal from 'react-native-modal';
 import {ZoomModal} from './ZoomModal';
+import StarRating from 'react-native-star-rating';
 
 const ToggleModal = ({
   isVisible,
@@ -70,8 +71,10 @@ const ToggleModal = ({
 
           <View style={styles.informationContainer}>
             <View style={{flex: 1}}>
-              <Text>{data.category}</Text>
-              <Text style={{fontSize: 14, marginTop: 4}}>{data.title}</Text>
+              <Text style={{fontSize: 18}}>{data.category}</Text>
+              <Text style={{fontSize: 14, marginTop: 4, fontWeight: 'bold'}}>
+                {data.title}
+              </Text>
               <ScrollView
                 style={{
                   backgroundColor: '#eee',
@@ -85,19 +88,27 @@ const ToggleModal = ({
               <Text style={{fontSize: 16, marginTop: 4, fontWeight: 'bold'}}>
                 ${data.price}
               </Text>
-            </View>
-
-            <View style={styles.ratingStyleContainer}>
-              <Text
-                style={[
-                  styles.ratingStyle,
-                  {
-                    color: data.rating > 3 ? 'green' : 'orange',
-                    borderColor: data.rating > 3 ? 'green' : 'orange',
-                  },
-                ]}>
-                {data.rating}
-              </Text>
+              {/* <View style={styles.ratingStyleContainer}>
+                <Text
+                  style={[
+                    styles.ratingStyle,
+                    {
+                      color: data.rating > 3 ? 'green' : 'orange',
+                      borderColor: data.rating > 3 ? 'green' : 'orange',
+                    },
+                  ]}>
+                  {data.rating}
+                </Text>
+              </View> */}
+              <StarRating
+                containerStyle={{width: 50}}
+                starStyle={{width: 30, height: 20}}
+                starSize={20}
+                disabled={false}
+                maxStars={5}
+                rating={data.rating}
+                fullStarColor={data.rating > 3 ? 'green' : 'orange'}
+              />
             </View>
           </View>
         </View>
@@ -142,6 +153,10 @@ const styles = StyleSheet.create({
     elevation: 5,
     borderRadius: 10,
     alignItems: 'center',
+    shadowColor: '#171717',
+    shadowOffset: {width: 0, height: 0.5},
+    shadowOpacity: 10,
+    shadowRadius: 1,
 
     marginTop: 10,
   },
@@ -154,14 +169,15 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   ratingStyleContainer: {
+    borderWidth: 1,
     borderRadius: 10,
-    width: 50,
+    // width: 50,
     justifyContent: 'center',
     alignItems: 'center',
   },
   ratingStyle: {
     fontWeight: 'bold',
-    borderWidth: 1,
+    // borderWidth: 1,
     padding: 2,
     borderRadius: 5,
   },
@@ -194,7 +210,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
+    elevation: 2,
     // top: 30,
+
+    shadowColor: '#171717',
+    shadowOffset: {width: 0, height: 0.5},
+    shadowOpacity: 10,
+    shadowRadius: 1,
   },
   middleContainer: {
     // borderWidth: 1,

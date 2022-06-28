@@ -7,7 +7,6 @@ import {
   Image,
   TouchableOpacity,
   ActivityIndicator,
-  Dimensions,
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
 import {shallowEqual, useDispatch, useSelector} from 'react-redux';
@@ -30,7 +29,7 @@ const HomeScreen = () => {
   const favItemData = useSelector(favoriteItemSelector, shallowEqual);
   const dispatch = useDispatch();
   const productData = useSelector(productListSelector, shallowEqual);
-  const itemCart = useSelector(cartItemSelector, shallowEqual);
+  // const itemCart = useSelector(cartItemSelector, shallowEqual);
 
   const [limit, setLimit] = useState(10);
   const [loading, setLoading] = useState(false);
@@ -39,9 +38,12 @@ const HomeScreen = () => {
   );
 
   const [favoriteList, setFavoruiteList] = useState([]);
+  const [cartItemList, setCartItemList] = useState([]);
   const [isModalVisible, setModalVisible] = useState(false);
   const [modalData, setModalData] = useState([]);
   const [gridColumn, setGridColumn] = useState(true);
+  let demoImage =
+    'https://upload.wikimedia.org/wikipedia/commons/d/d1/Image_not_available.png';
 
   useEffect(() => {
     setLoading(true);
@@ -87,9 +89,7 @@ const HomeScreen = () => {
             <Image
               style={styles.productImage}
               source={{
-                uri:
-                  image ||
-                  'https://upload.wikimedia.org/wikipedia/commons/d/d1/Image_not_available.png',
+                uri: image || demoImage,
               }}
             />
 
@@ -147,10 +147,16 @@ const HomeScreen = () => {
   };
 
   const addItemCart = item => {
-    dispatch(cartList(item));
-    navigation.navigate('Cart');
+    let productItem = {...item, qty: 1, tax: 6};
+    dispatch(cartList(productItem));
+    setCartItemList([...cartItemList, item]);
+
+    Toast.show({
+      type: 'success',
+      text1: `${item.title}`,
+      text2: `Item Added to Cart`,
+    });
     toggleModal();
-    // alert('add item to cart');
   };
 
   const onFavorite = addProducts => {
@@ -215,7 +221,17 @@ const HomeScreen = () => {
     }
   };
 
-  const renderHeader = () => {};
+  const renderFooter = () => {
+    if (productData.lenght == limit) {
+      return;
+    } else {
+      return (
+        <View style={{height: 45}}>
+          <Text>loading please wait</Text>
+        </View>
+      );
+    }
+  };
 
   return (
     <SafeAreaView>
@@ -258,13 +274,12 @@ const HomeScreen = () => {
             ListEmptyComponent={listEmptyComponent}
             onEndReached={handlePaggination}
             numColumns={gridColumn ? 1 : 2}
+            ListFooterComponent={renderFooter}
             // ListHeaderComponent={renderHeader}
             // columnWrapperStyle={{flex: 1, justifyContent: 'space-evenly'}}
           />
         </>
       )}
-
-      {/* <Toast /> */}
     </SafeAreaView>
   );
 };

@@ -1,8 +1,38 @@
-import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  FlatList,
+} from 'react-native';
 import React from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const UserPro = ({navigation}) => {
+  // const test = ['test', 'test1', 'test2', 'test3', 'test4', 'test5'];
+
+  const newData = [
+    {
+      data: [
+        {id: 1, name: 'ashvin', job: 'vice Captian', qty: 9},
+        {id: 2, name: 'vin', job: 'driver', qty: 1},
+        {id: 3, name: 'aaaron', job: 'postman', qty: 6},
+        {id: 4, name: 'robbot', job: 'batter', qty: 3},
+        {id: 5, name: 'boy', job: 'bowler', qty: 4},
+        {id: 6, name: 'toy', job: 'keeper', qty: 2},
+      ],
+    },
+  ];
+
+  let newItem = newData.map(item => {
+    // console.log('0000--->', newData.indexOf(item.data));
+    let index = item.data.findIndex(x => x.name === 'boy');
+    console.log(index);
+  });
+
+  console.log('indexData-->', newItem);
+
   return (
     <View style={styles.container}>
       <View style={styles.header}></View>
@@ -19,7 +49,7 @@ const UserPro = ({navigation}) => {
             electram expetendis, omittam deseruisse consequuntur ius an,
           </Text>
 
-          <TouchableOpacity style={styles.buttonContainer}>
+          {/* <TouchableOpacity style={styles.buttonContainer}>
             <Text>Opcion 1</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.buttonContainer}>
@@ -37,7 +67,7 @@ const UserPro = ({navigation}) => {
             }}
             style={styles.buttonContainer}>
             <Text>Sign Out</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </View>
     </View>

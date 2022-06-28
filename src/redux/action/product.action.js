@@ -2,7 +2,7 @@ export const GET_PRODUCTS = 'GET_PRODUCTS';
 export const LOADER = 'LOADER';
 
 export const productList = limit => {
-  console.log('----', limit);
+  // console.log('----', limit);
   try {
     return async dispatch => {
       const result = await fetch(

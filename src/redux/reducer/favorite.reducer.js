@@ -10,7 +10,6 @@ const favoriteReducer = (state = initialState, {type, payload}) => {
     // case LOADER:
     //   return {...state, loading: true};
     case FAVORITE_ITEM:
-      console.log('--add-reducer-->', payload);
       return {
         ...state,
         favItemBulk: state.favItemBulk.concat(payload),

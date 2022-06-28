@@ -10,6 +10,7 @@ import Cart from './screens/Cart';
 import UserPro from './screens/UserPro';
 import LoginScreen from './screens/LoginScreen';
 import SplashScreen from './screens/SplashScreen';
+import PlaceOrderScreen from './screens/PlaceOrderScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -99,6 +100,14 @@ const Router = () => {
             title: 'Product List',
             headerStyle: {backgroundColor: '#eee'},
           }}
+        />
+        <Stack.Screen
+          name="PlaceOrderScreen"
+          component={PlaceOrderScreen}
+          // options={{
+          //   title: 'Product List',
+          //   headerStyle: {backgroundColor: '#eee'},
+          // }}
         />
       </Stack.Navigator>
     </NavigationContainer>
